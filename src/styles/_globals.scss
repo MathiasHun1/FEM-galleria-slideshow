@@ -1,0 +1,136 @@
+@use './abstractions' as *;
+@use './breakpoints' as media;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.app {
+  min-height: 100%;
+}
+
+/*-----------------*/
+/*----UTILIITES----*/
+/*-----------------*/
+
+//layout
+.container {
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+.wrapper {
+  padding-inline: 1.5rem;
+
+  @include media.small-above {
+    padding-inline: 2.5rem;
+  }
+}
+
+// text
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-white-opq {
+  color: rgba($clr-white, 0.75);
+}
+
+.text-black {
+  color: black;
+}
+
+.text-black-opq {
+  color: rgba($clr-black, 0.75);
+}
+
+.text-gray {
+  color: $clr-gray-2;
+}
+
+.text-display {
+  font-family: $ff-base;
+  font-size: calc(200rem / 16);
+  line-height: calc(150 / 200);
+  font-weight: bold;
+
+  @include media.small-under {
+    font-size: calc(100rem / 16);
+  }
+}
+
+.text-body {
+  font-family: $ff-base;
+  font-size: calc(14rem / 16);
+  font-weight: bold;
+  line-height: 2;
+}
+
+.text-heading-1 {
+  font-family: $ff-base;
+  font-size: calc(56rem / 16);
+  font-weight: bold;
+  line-height: calc(64 / 56);
+
+  @include media.small-under {
+    font-size: calc(24rem / 16);
+  }
+}
+
+.text-heading-2 {
+  font-family: $ff-base;
+  font-size: calc(24rem / 16);
+  font-weight: bold;
+  line-height: calc(29 / 24);
+}
+
+.text-heading-3 {
+  font-family: $ff-base;
+  font-size: calc(18rem / 16);
+  font-weight: bold;
+  // line-height: calc(22 / 18);
+
+  @include media.small-under {
+    font-size: calc(14rem / 16);
+  }
+}
+
+.text-subhead-1 {
+  font-family: $ff-base;
+  font-size: calc(15rem / 16);
+  font-weight: normal;
+  line-height: calc(19 / 15);
+}
+
+.text-subhead-2 {
+  font-family: $ff-base;
+  font-size: calc(13rem / 16);
+  font-weight: normal;
+  line-height: calc(17 / 13);
+}
+
+.text-link-1 {
+  font-family: $ff-base;
+  font-size: calc(12rem / 16);
+  font-weight: bold;
+  line-height: calc(15 / 12);
+  letter-spacing: 2.5px;
+
+  @include media.small-under {
+    font-size: calc(9rem / 16);
+  }
+}
+
+.text-link-2 {
+  font-family: $ff-base;
+  font-size: calc(9rem / 16);
+  font-weight: bold;
+  line-height: calc(11 / 9);
+  letter-spacing: 2px;
+}

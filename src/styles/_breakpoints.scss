@@ -1,0 +1,25 @@
+@use './abstractions' as *;
+
+@mixin small-under() {
+  @media (max-width: $breakpoint-small) {
+    @content;
+  }
+}
+
+@mixin small-above() {
+  @media (min-width: $breakpoint-small) {
+    @content;
+  }
+}
+
+@mixin large-under() {
+  @media (max-width: $breakpoint-large) {
+    @content;
+  }
+}
+
+@mixin large-above() {
+  @media (min-width: $breakpoint-large) {
+    @content;
+  }
+}
