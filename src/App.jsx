@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router';
+import { Routes, Route, Navigate, useLocation } from 'react-router';
 import { useState, useEffect } from 'react';
 import services from './services/cardsService';
 import utils from './utils';
@@ -32,8 +32,9 @@ function App() {
       <hr className="divider" />
       <main className="home wrapper">
         <Routes>
+          <Route path="/" element={<Navigate to="/home" replace />} />
           <Route
-            path="/"
+            path="/home"
             element={<Home data={data} setCardId={setCardId} />}
           />
           <Route path="slideshow" element={<SlideShowLayout />}>
