@@ -1,35 +1,45 @@
+import { Routes, Route, useLocation } from 'react-router';
+import { useState, useEffect } from 'react';
+import services from './services/cardsService';
+import utils from './utils';
+
 import Header from './components/Header';
-import data from './data.json';
+import Home from './components/pages/Home';
+import SlideShow from './components/pages/SlideShow';
+import SlideShowLayout from './components/pages/SlideShowLayout';
 
 function App() {
-  console.log(data);
+  const [data, setData] = useState(null);
+  // const url = useLocation();
+  const [cardId, setCardId] = useState(null);
+
+  useEffect(() => {
+    services.getAllCards().then((result) => {
+      if (result) {
+        const cards = utils.createIds(result);
+        setData(cards);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(cardId);
+  }, [cardId]);
 
   return (
     <div className="app text-body container">
       <Header />
       <hr className="divider" />
-      <main className="main wrapper">
-        <div className="masonry-cont">
-          {data.map((elem) => (
-            <div key={elem.name} className="card">
-              <img src={elem.images.gallery} alt="" />
-              <div className="card__text">
-                <div className="card__inner-wrapper">
-                  <a
-                    href="https://images.steamusercontent.com/ugc/769399012346960845/636154F0A518E36C0154078B114B2F266B00EDCC/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false"
-                    className="link"
-                  ></a>
-                  <h2 className="card__title text-white text-heading-2">
-                    {elem.name}
-                  </h2>
-                  <p className="card__artist text-white-opq text-subhead-2">
-                    {elem.artist.name}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <main className="home wrapper">
+        <Routes>
+          <Route
+            path="/"
+            element={<Home data={data} setCardId={setCardId} />}
+          />
+          <Route path="slideshow" element={<SlideShowLayout />}>
+            <Route path={`${cardId}`} element={<div>{cardId}</div>} />
+          </Route>
+        </Routes>
       </main>
     </div>
   );
