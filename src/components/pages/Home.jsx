@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 
 const Home = ({ data, setCardId }) => {
   return (
-    <div className="masonry-cont">
+    <div className="masonry-cont wrapper">
       {!data && <div>Loading ...</div>}
 
       {data &&

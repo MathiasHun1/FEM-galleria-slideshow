@@ -1,6 +1,11 @@
 @use './abstractions' as *;
 @use './breakpoints' as media;
 
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
 .primary-header {
   padding-block: 2.5rem;
   display: flex;
@@ -22,12 +27,13 @@
   margin: 0;
 
   @include media.large-above {
-    margin-inline: 1.5rem;
+    margin-inline: var(--inline-spacing);
   }
 }
 
 .main {
-  min-height: 100%;
+  flex-grow: 1;
+  display: grid;
 }
 
 .card {
@@ -82,4 +88,98 @@
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  padding-top: 6rem;
+}
+
+.content__image-section {
+  display: flex;
+}
+
+.image-section__inner {
+  width: 70%;
+  position: relative;
+  height: fit-content;
+}
+
+.content__hero-image {
+  flex: 2.5;
+  min-width: 20rem;
+  height: 35rem;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+}
+
+.content__artist-image {
+  position: absolute;
+  width: fit-content;
+  bottom: 0;
+  right: 0;
+  transform: translateX(calc(100% + 30px)) translateY(50%);
+}
+
+.content__heading-cont {
+  background: linear-gradient(to right, white 30%, transparent);
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24rem;
+  padding-left: 4rem;
+  padding-bottom: 4rem;
+  transform: translateX(80%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.content__text-section {
+  padding-left: 6rem;
+}
+
+.content__text-section > .big-text {
+  color: $clr-gray-1;
+  z-index: 10;
+}
+
+.content__text-section > .description-text {
+  display: inline-block;
+  width: 85%;
+  transform: translateY(-2.5rem);
+}
+
+.slider-nav {
+  display: flex;
+  gap: 2.5rem;
+  width: fit-content;
+  height: fit-content;
+}
+
+.slideshow-container {
+  display: grid;
+  grid-template-rows: 1fr min-content;
+}
+
+.slideshow-container > footer {
+}
+
+.footer__content {
+  padding-block: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-indicator {
+  background-color: $clr-gray-1;
+  height: 2px;
+  top: 0;
 }
