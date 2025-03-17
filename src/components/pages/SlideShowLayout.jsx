@@ -9,22 +9,65 @@ const SlideShowLayout = ({ data, setCardId, cardData }) => {
   const nextId =
     currentIndex === data.length - 1 ? data[0].id : data[currentIndex + 1].id;
 
+  const stepLeft = () => {
+    if (currentIndex === 0) {
+      return;
+    } else {
+      setCardId(prevId);
+    }
+  };
+
+  const stepRight = () => {
+    if (currentIndex === data.length - 1) {
+      return;
+    } else {
+      setCardId(nextId);
+    }
+  };
+
+  const calculateIndicatorValue = () => {
+    const elementPosition = currentIndex + 1;
+    const all = data.length;
+    const fillRatio = (elementPosition / all) * 100;
+
+    return fillRatio;
+  };
+
+  const indicatorStyle = {
+    width: `${calculateIndicatorValue()}%`,
+  };
+
   return (
     <div className="slideshow-container">
       <Outlet />
 
       <footer>
-        <div className="progress-indicator"></div>
+        <div className="progress-indicator-body">
+          <div className="progress-indicator-fill" style={indicatorStyle}></div>
+        </div>
         <div className="footer__content wrapper">
           <div className="footer-meta">
-            <p>sdfsdf</p>
-            <p>sdfsdf</p>
+            <p className="text-heading-3">{cardData.name}</p>
+            <p className="text-subhead-2 text-black-opq">
+              {cardData.artist.name}
+            </p>
           </div>
+
           <nav className="slider-nav">
-            <Link to={`/slideshow/${nextId}`} onClick={() => setCardId(prevId)}>
+            <Link
+              to={`/slideshow/${nextId}`}
+              className={`${currentIndex === 0 ? 'inactive' : ''}`}
+              onClick={stepLeft}
+            >
               <img src={leftIcon} alt="" />
             </Link>
-            <Link to={`/slideshow/${nextId}`} onClick={() => setCardId(nextId)}>
+            <Link
+              to={`/slideshow/${nextId}`}
+              className={`${
+                currentIndex === data.length - 1 ? 'inactive' : ''
+              }`}
+              onClick={stepRight}
+            >
               <img src={rightIcon} alt="" />
             </Link>
           </nav>

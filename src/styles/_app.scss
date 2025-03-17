@@ -20,6 +20,11 @@
 .header__button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
+}
+
+.header__button:hover {
+  color: $clr-black;
 }
 
 .divider {
@@ -106,10 +111,11 @@
   height: fit-content;
 }
 
-.content__hero-image {
+.content__hero-image-wrapper {
   flex: 2.5;
   min-width: 20rem;
   height: 35rem;
+  position: relative;
 
   & img {
     width: 100%;
@@ -117,6 +123,14 @@
     object-fit: cover;
     object-position: top;
   }
+}
+
+.content__hero-image-wrapper > button {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .content__artist-image {
@@ -128,7 +142,7 @@
 }
 
 .content__heading-cont {
-  background: linear-gradient(to right, white 30%, transparent);
+  background: linear-gradient(to right, white 50%, transparent);
   position: absolute;
   top: 0;
   right: 0;
@@ -178,8 +192,43 @@
   align-items: center;
 }
 
-.progress-indicator {
+.progress-indicator-body {
   background-color: $clr-gray-1;
   height: 2px;
   top: 0;
+}
+
+.progress-indicator-fill {
+  background-color: $clr-black;
+  height: 100%;
+}
+
+.dialog {
+  border: none;
+  padding: 0;
+  width: fit-content;
+  height: min(fit-content, 60vh);
+  position: relative;
+  overflow: visible;
+}
+
+.dialog::backdrop {
+  background-color: rgba(black, 0.88);
+}
+
+.dialog > img {
+  height: 100%;
+  object-fit: contain;
+}
+
+.dialog > button {
+  cursor: pointer;
+  color: $clr-white;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(-200%);
+  z-index: 1000;
 }
