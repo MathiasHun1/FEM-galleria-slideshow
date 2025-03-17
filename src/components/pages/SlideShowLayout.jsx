@@ -12,6 +12,10 @@ const SlideShowLayout = ({ data, setCardId, cardData }) => {
       navigate('/home');
     }
   }, []);
+
+  if (!data) {
+    return null;
+  }
   /*--------------------------------------------------------------*/
 
   const currentIndex = data.indexOf(cardData);
