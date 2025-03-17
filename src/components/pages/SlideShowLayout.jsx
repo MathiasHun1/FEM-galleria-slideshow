@@ -1,8 +1,14 @@
-import { Outlet, Link } from 'react-router';
+import { Outlet, Link, useNavigate } from 'react-router';
 import leftIcon from '/assets/shared/icon-back-button.svg';
 import rightIcon from '/assets/shared/icon-next-button.svg';
 
 const SlideShowLayout = ({ data, setCardId, cardData }) => {
+  //temporary solution for page refresh on a CDN deployment
+  const navigate = useNavigate();
+  if (!data) {
+    navigate('/home');
+  }
+
   const currentIndex = data.indexOf(cardData);
   const prevId =
     currentIndex === 0 ? data[data.length - 1].id : data[currentIndex - 1].id;
