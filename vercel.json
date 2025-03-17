@@ -9,5 +9,11 @@
         }
       ]
     }
+  ],
+  "routes": [
+    {
+      "src": "/(.*).html",
+      "dest": "/index.html"
+    }
   ]
 }
