@@ -112,8 +112,6 @@
 .slideshow-content-wrapper {
   padding-top: 6rem;
   display: grid;
-  opacity: 0;
-  transition: opacity 400ms ease;
 
   @include media.large-above {
     grid-template-columns: 1.3fr 1fr;

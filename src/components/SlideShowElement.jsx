@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { motion } from 'motion/react';
 import viewSVG from '/assets/shared/icon-view-image.svg';
 
 const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
@@ -11,7 +12,7 @@ const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
     const img = new Image();
     img.src = images.hero.large.slice(1);
     img.onload = () => setImageLoaded(true);
-  }, [images.hero.large]);
+  }, [cardData]);
 
   const showModal = () => {
     if (dialogRef.current) {
@@ -25,11 +26,17 @@ const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
     }
   };
 
+  if (!imageLoaded) {
+    return null;
+  }
+
   return (
-    <div
-      className={`slideshow-content-wrapper wrapper ${
-        imageLoaded ? 'visible' : ''
-      }`}
+    <motion.div
+      className="slideshow-content-wrapper wrapper"
+      style={{ visibility: imageLoaded ? 'visible' : 'hidden' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
     >
       <section className="slideshow-content__image-section">
         <picture className="slideshow-content__hero-picture">
@@ -76,7 +83,7 @@ const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
           Close
         </button>
       </dialog>
-    </div>
+    </motion.div>
   );
 };
 

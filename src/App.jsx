@@ -39,6 +39,7 @@ function App() {
 
     if (location.pathname === '/home') {
       if (!cardId) {
+        setImageLoaded(false);
         setCardId(data[0].id);
         navigate(`/slideshow/${data[0].id}`);
       } else {
@@ -48,6 +49,7 @@ function App() {
 
     if (!intervalRef.current) {
       intervalRef.current = setInterval(() => {
+        setImageLoaded(false);
         setCardId((prevId) => {
           const prevIndex = data.findIndex((card) => card.id === prevId);
           if (prevIndex === data.length - 1) {

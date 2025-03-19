@@ -28,6 +28,7 @@ const SlideShowLayout = ({ data, setCardId, cardData, setImageLoaded }) => {
     if (currentIndex === 0) {
       return;
     } else {
+      setImageLoaded(false);
       setCardId(prevId);
     }
   };
