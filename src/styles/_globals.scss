@@ -69,7 +69,8 @@ body,
   font-weight: bold;
 
   @include media.small-under {
-    font-size: calc(100rem / 16);
+    font-size: 5.5rem;
+    line-height: 0.5;
   }
 }
 

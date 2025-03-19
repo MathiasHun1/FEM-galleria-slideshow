@@ -56,8 +56,8 @@ const SlideShowLayout = ({ data, setCardId, cardData }) => {
     <div className="slideshow-container">
       <Outlet />
 
-      <footer>
-        <div className="progress-indicator-body">
+      <footer className="footer">
+        <div className="footer__progress-indicator-body">
           <div className="progress-indicator-fill" style={indicatorStyle}></div>
         </div>
         <div className="footer__content wrapper">
@@ -68,7 +68,7 @@ const SlideShowLayout = ({ data, setCardId, cardData }) => {
             </p>
           </div>
 
-          <nav className="slider-nav">
+          <nav className="footer__slider-nav">
             <Link
               to={`/slideshow/${nextId}`}
               className={`${currentIndex === 0 ? 'inactive' : ''}`}

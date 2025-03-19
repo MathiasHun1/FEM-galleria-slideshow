@@ -1,115 +1,124 @@
+@use './breakpoints' as media;
+
 /*---- HOME ----*/
 .masonry-cont {
-  width: 100%;
   display: grid;
-  padding-block: 2.5rem;
-  grid-template-columns: repeat(4, minmax(240px, 310px));
-  grid-template-rows: repeat(278, 5px);
-  column-gap: 40px;
+  grid-template-columns: 1fr;
+  row-gap: 1.5rem;
 }
 
-.card:nth-child(1) {
-  grid-column-start: 1;
-  grid-row-start: 1;
-  grid-row-end: 51;
-}
+@include media.large-above {
+  .masonry-cont {
+    width: 100%;
+    display: grid;
+    row-gap: unset;
+    padding-block: 2.5rem;
+    grid-template-columns: repeat(4, minmax(240px, 310px));
+    grid-template-rows: repeat(278, 5px);
+    column-gap: 40px;
+  }
 
-.card:nth-child(2) {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 81;
-}
+  .card:nth-child(1) {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    grid-row-end: 51;
+  }
 
-.card:nth-child(3) {
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row-start: 1;
-  grid-row-end: 58;
-}
+  .card:nth-child(2) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 81;
+  }
 
-.card:nth-child(4) {
-  grid-column-start: 4;
-  grid-column-end: 5;
-  grid-row-start: 1;
-  grid-row-end: 51;
-}
+  .card:nth-child(3) {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 58;
+  }
 
-.card:nth-child(5) {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 59;
-  grid-row-end: 127;
-}
+  .card:nth-child(4) {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 51;
+  }
 
-.card:nth-child(6) {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 90;
-  grid-row-end: 146;
-}
+  .card:nth-child(5) {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 59;
+    grid-row-end: 127;
+  }
 
-.card:nth-child(7) {
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row-start: 67;
-  grid-row-end: 167;
-}
+  .card:nth-child(6) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 90;
+    grid-row-end: 146;
+  }
 
-.card:nth-child(8) {
-  grid-column-start: 4;
-  grid-column-end: 5;
-  grid-row-start: 60;
-  grid-row-end: 110;
-}
+  .card:nth-child(7) {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 67;
+    grid-row-end: 167;
+  }
 
-.card:nth-child(9) {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 135;
-  grid-row-end: 219;
-}
+  .card:nth-child(8) {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 60;
+    grid-row-end: 110;
+  }
 
-.card:nth-child(10) {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 155;
-  grid-row-end: 207;
-}
+  .card:nth-child(9) {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 135;
+    grid-row-end: 219;
+  }
 
-.card:nth-child(11) {
-  grid-column-start: 4;
-  grid-column-end: 5;
-  grid-row-start: 118;
-  grid-row-end: 204;
-}
+  .card:nth-child(10) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 155;
+    grid-row-end: 207;
+  }
 
-.card:nth-child(12) {
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 227;
-  grid-row-end: 279;
-}
+  .card:nth-child(11) {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 118;
+    grid-row-end: 204;
+  }
 
-.card:nth-child(13) {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 215;
-  grid-row-end: 279;
-}
+  .card:nth-child(12) {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 227;
+    grid-row-end: 279;
+  }
 
-.card:nth-child(14) {
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row-start: 175;
-  grid-row-end: 279;
-}
+  .card:nth-child(13) {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 215;
+    grid-row-end: 279;
+  }
 
-.card:nth-child(15) {
-  grid-column-start: 4;
-  grid-column-end: 5;
-  grid-row-start: 212;
-  grid-row-end: 279;
-}
+  .card:nth-child(14) {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 175;
+    grid-row-end: 279;
+  }
 
-/*----SlideShow----*/
+  .card:nth-child(15) {
+    grid-column-start: 4;
+    grid-column-end: 5;
+    grid-row-start: 212;
+    grid-row-end: 279;
+  }
+}

@@ -12,7 +12,7 @@ import utils from './utils';
 import Header from './components/Header';
 import Home from './components/pages/Home';
 import SlideShowLayout from './components/pages/SlideShowLayout';
-import SlideShowElement from './components/pages/SlideShowElement';
+import SlideShowElement from './components/SlideShowElement';
 
 function App() {
   const [data, setData] = useState(null);
