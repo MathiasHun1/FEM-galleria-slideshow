@@ -112,9 +112,15 @@
 .slideshow-content-wrapper {
   padding-top: 6rem;
   display: grid;
+  grid-template-rows: 35rem 20rem;
+
+  @include media.small-above {
+    grid-template-rows: revert;
+  }
 
   @include media.large-above {
     grid-template-columns: 1.3fr 1fr;
+    min-height: 55rem;
   }
 }
 
@@ -287,8 +293,6 @@
 }
 
 .content__text-section > .description-text {
-  margin-top: -2rem;
-
   @include media.small-above {
     margin-top: -4rem;
     max-width: 50ch;
