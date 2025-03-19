@@ -3,7 +3,7 @@ import leftIcon from '/assets/shared/icon-back-button.svg';
 import rightIcon from '/assets/shared/icon-next-button.svg';
 import { useEffect } from 'react';
 
-const SlideShowLayout = ({ data, setCardId, cardData }) => {
+const SlideShowLayout = ({ data, setCardId, cardData, setImageLoaded }) => {
   /*--- temporary solution for page refresh on a CDN deployment ---*/
   const navigate = useNavigate();
 
@@ -36,6 +36,7 @@ const SlideShowLayout = ({ data, setCardId, cardData }) => {
     if (currentIndex === data.length - 1) {
       return;
     } else {
+      setImageLoaded(false);
       setCardId(nextId);
     }
   };

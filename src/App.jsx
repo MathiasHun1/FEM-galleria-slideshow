@@ -18,6 +18,7 @@ function App() {
   const [data, setData] = useState(null);
   const [cardId, setCardId] = useState(null); // id of the active card
   const [slideshowActive, setSlideshowActive] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const intervalRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -90,12 +91,19 @@ function App() {
                 data={data}
                 setCardId={setCardId}
                 cardData={activeCard}
+                setImageLoaded={setImageLoaded}
               />
             }
           >
             <Route
               path=":cardId"
-              element={<SlideShowElement cardData={activeCard} />}
+              element={
+                <SlideShowElement
+                  cardData={activeCard}
+                  setImageLoaded={setImageLoaded}
+                  imageLoaded={imageLoaded}
+                />
+              }
             />
           </Route>
           <Route path="/*" element={<Navigate to="/home" replace />} />

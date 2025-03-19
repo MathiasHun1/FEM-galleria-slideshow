@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import viewSVG from '/assets/shared/icon-view-image.svg';
 
-const SlideShowElement = ({ cardData }) => {
+const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
   const { name, year, description, source, artist, images } = cardData;
-  const [imageLoaded, setImageLoaded] = useState(false);
   const dialogRef = useRef(null);
 
-  // useEffect(() => {
-  //   const img = new Image();
-  //   img.onload = () => setImageLoaded(true);
-  //   img.src = 'images.hero.large.slice(1)';
-  // });
+  console.log(imageLoaded);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = images.hero.large.slice(1);
+    img.onload = () => setImageLoaded(true);
+  }, [cardData]);
 
   const showModal = () => {
     if (dialogRef.current) {
@@ -27,23 +28,19 @@ const SlideShowElement = ({ cardData }) => {
   return (
     <div
       className="slideshow-content-wrapper wrapper"
-      style={{ opacity: !imageLoaded ? 1 : 0 }}
+      style={{ opacity: imageLoaded ? 1 : 0 }}
     >
       <section className="slideshow-content__image-section">
         <picture className="slideshow-content__hero-picture">
           <source
-            srcset={images.hero.small.slice(1)}
+            srcSet={images.hero.small.slice(1)}
             media={`(max-width: 35rem)`}
           />
           <source
-            srcset={images.hero.large.slice(1)}
+            srcSet={images.hero.large.slice(1)}
             media={`(min-width: 35rem)`}
           />
-          <img
-            src={images.hero.large.slice(1)}
-            alt=""
-            onload={() => setImageLoaded(true)}
-          />
+          <img src={images.hero.large.slice(1)} alt="" />
           <button className="view-image-button" onClick={showModal}>
             <img className="view-logo" src={viewSVG} alt="" />
             <span className="uppercase">View image</span>
