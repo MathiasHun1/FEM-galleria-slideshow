@@ -27,6 +27,11 @@ body,
   cursor: default;
 }
 
+.visible {
+  opacity: 1 !important;
+  transition: opacity 400ms ease;
+}
+
 //layout
 .container {
   max-width: 1440px;

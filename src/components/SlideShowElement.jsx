@@ -11,7 +11,7 @@ const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
     const img = new Image();
     img.src = images.hero.large.slice(1);
     img.onload = () => setImageLoaded(true);
-  }, [cardData]);
+  }, [images.hero.large]);
 
   const showModal = () => {
     if (dialogRef.current) {
@@ -27,8 +27,9 @@ const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
 
   return (
     <div
-      className="slideshow-content-wrapper wrapper"
-      style={{ opacity: imageLoaded ? 1 : 0 }}
+      className={`slideshow-content-wrapper wrapper ${
+        imageLoaded ? 'visible' : ''
+      }`}
     >
       <section className="slideshow-content__image-section">
         <picture className="slideshow-content__hero-picture">
