@@ -40,7 +40,7 @@ const SlideShowElement = ({ cardData }) => {
         <div className="slideshow-content__meta">
           <div className="content__heading-cont">
             <h1 className="text-heading-1">{name}</h1>
-            <p className="text-subhead-1 text-black-opq">{artist.name}</p>
+            <p className="text-subhead-1 text-gray">{artist.name}</p>
             <picture className="content__artist-image--mobile">
               <img src={artist.image.slice(1)} alt="" />
             </picture>
