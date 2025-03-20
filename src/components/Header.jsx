@@ -1,4 +1,5 @@
-import { Link } from 'react-router';
+import { Link, redirect } from 'react-router';
+import { motion } from 'motion/react';
 
 const Header = ({ slideshowActive, setSlideshowActive }) => {
   console.log('HEADER RENDERS');
@@ -13,7 +14,24 @@ const Header = ({ slideshowActive, setSlideshowActive }) => {
         <img src="/assets/shared/logo.svg" alt="galleria logo" />
       </Link>
 
-      <button
+      <motion.button
+        animate={
+          !slideshowActive
+            ? {
+                scale: [1, 1, 1.1, 1],
+              }
+            : { scale: [1] }
+        }
+        transition={
+          !slideshowActive
+            ? {
+                duration: 5,
+                times: [0, 0.8, 0.9, 1],
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }
+            : { duration: 0 }
+        }
         className="header__button uppercase text-link-1 text-gray"
         onClick={() => {
           slideshowActive
@@ -22,7 +40,7 @@ const Header = ({ slideshowActive, setSlideshowActive }) => {
         }}
       >
         {!slideshowActive ? 'Start' : 'Stop'} Slideshow
-      </button>
+      </motion.button>
     </header>
   );
 };
