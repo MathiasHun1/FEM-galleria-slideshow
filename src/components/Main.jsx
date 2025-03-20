@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from 'react-router';
-import { useState } from 'react';
 
 import Home from './pages/Home';
 import SlideShowLayout from './pages/SlideShowLayout';

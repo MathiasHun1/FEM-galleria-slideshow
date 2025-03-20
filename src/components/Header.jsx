@@ -1,4 +1,4 @@
-import { Link, redirect } from 'react-router';
+import { Link } from 'react-router';
 import { motion } from 'motion/react';
 
 const Header = ({ slideshowActive, setSlideshowActive }) => {
