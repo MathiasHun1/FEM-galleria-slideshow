@@ -112,10 +112,10 @@
 .slideshow-content-wrapper {
   padding-top: 6rem;
   display: grid;
-  grid-template-rows: 35rem 20rem;
+  grid-template-rows: 35rem 28rem;
 
   @include media.small-above {
-    grid-template-rows: revert;
+    grid-template-rows: unset;
   }
 
   @include media.large-above {
