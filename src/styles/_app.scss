@@ -120,7 +120,6 @@
 
   @include media.large-above {
     grid-template-columns: 1.3fr 1fr;
-    min-height: 55rem;
   }
 }
 
