@@ -1,19 +1,25 @@
 import { Link } from 'react-router';
 
-const Header = ({ onStartSlideshow, onStopSlideshow, slideshowActive }) => {
+const Header = ({ slideshowActive, setSlideshowActive }) => {
+  console.log('HEADER RENDERS');
+
   return (
     <header className="primary-header wrapper">
       <Link
         to="/home"
         className="header__logo-wrapper"
-        onClick={onStopSlideshow}
+        onClick={() => setSlideshowActive(false)}
       >
         <img src="/assets/shared/logo.svg" alt="galleria logo" />
       </Link>
 
       <button
         className="header__button uppercase text-link-1 text-gray"
-        onClick={!slideshowActive ? onStartSlideshow : onStopSlideshow}
+        onClick={() => {
+          slideshowActive
+            ? setSlideshowActive(false)
+            : setSlideshowActive(true);
+        }}
       >
         {!slideshowActive ? 'Start' : 'Stop'} Slideshow
       </button>

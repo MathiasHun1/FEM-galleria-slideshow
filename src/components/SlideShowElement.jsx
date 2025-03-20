@@ -1,18 +1,30 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'motion/react';
+import { useParams } from 'react-router';
+import { motion, AnimatePresence } from 'motion/react';
+import { cacheImages } from '../utils.js';
 import viewSVG from '/assets/shared/icon-view-image.svg';
 
-const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
-  const { name, year, description, source, artist, images } = cardData;
-  const dialogRef = useRef(null);
-
+const SlideShowElement = ({ data, imageLoaded, setImageLoaded }) => {
+  const params = useParams();
   console.log(imageLoaded);
 
+  const currentCard = data.find((card) => card.id === params.cardId);
+
+  const { name, year, description, source, artist, images } = currentCard;
+  const dialogRef = useRef(null);
+
+  // preaload images for nice page render
   useEffect(() => {
-    const img = new Image();
-    img.src = images.hero.large.slice(1);
-    img.onload = () => setImageLoaded(true);
-  }, [cardData]);
+    const imagesArr = [
+      images.hero.small.slice(1),
+      images.hero.large.slice(1),
+      artist.image.slice(1),
+    ];
+
+    cacheImages(imagesArr)
+      .then((r) => setImageLoaded(true))
+      .catch((err) => console.error('Error loading images'));
+  }, [currentCard]);
 
   const showModal = () => {
     if (dialogRef.current) {
@@ -26,21 +38,17 @@ const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
     }
   };
 
-  // if (!imageLoaded) {
-  //   return null;
-  // }
-
   return (
-    <motion.div
-      className="slideshow-content-wrapper wrapper"
-      style={{ visibility: imageLoaded ? 'visible' : 'hidden' }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
-    >
-      {imageLoaded && (
-        <>
-          <section className="slideshow-content__image-section">
+    <div className="slideshow-content-wrapper wrapper">
+      <AnimatePresence>
+        {imageLoaded && (
+          <motion.section
+            className="slideshow-content__image-section"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <picture className="slideshow-content__hero-picture">
               <source
                 srcSet={images.hero.small.slice(1)}
@@ -56,7 +64,6 @@ const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
                 <span className="uppercase">View image</span>
               </button>
             </picture>
-
             <div className="slideshow-content__meta">
               <div className="content__heading-cont">
                 <h1 className="text-heading-1">{name}</h1>
@@ -69,16 +76,26 @@ const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
                 <img src={artist.image.slice(1)} alt="" />
               </picture>
             </div>
-          </section>
+          </motion.section>
+        )}
+      </AnimatePresence>
 
-          <section className="content__text-section">
+      <AnimatePresence>
+        {imageLoaded && (
+          <motion.section
+            className="content__text-section"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <p className="big-text text-display ">{year}</p>
             <p className="description-text text-body text-gray">
               {description}
             </p>
-          </section>
-        </>
-      )}
+          </motion.section>
+        )}
+      </AnimatePresence>
 
       <dialog className="dialog" ref={dialogRef}>
         <img src={images.gallery.slice(1)} alt="" />
@@ -89,7 +106,7 @@ const SlideShowElement = ({ cardData, imageLoaded, setImageLoaded }) => {
           Close
         </button>
       </dialog>
-    </motion.div>
+    </div>
   );
 };
 

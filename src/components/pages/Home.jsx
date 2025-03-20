@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-const Home = ({ data, setCardId }) => {
+const Home = ({ data }) => {
   return (
     <div className="masonry-cont wrapper">
       {!data && <div>Loading ...</div>}
@@ -14,7 +14,6 @@ const Home = ({ data, setCardId }) => {
                 <Link
                   className="card__link"
                   to={`/slideshow/${elem.id}`}
-                  onClick={() => setCardId(elem.id)}
                 ></Link>
                 <h2 className="card__title text-white text-heading-2">
                   {elem.name}

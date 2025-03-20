@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 
-const createIds = (cardsArray) => {
+export const createIds = (cardsArray) => {
   const cardsWithId = cardsArray.map((card) => {
     const updated = {
       ...card,
@@ -12,4 +12,15 @@ const createIds = (cardsArray) => {
   return cardsWithId;
 };
 
-export default { createIds };
+export const cacheImages = async (sourceArray) => {
+  const promises = sourceArray.map((src) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => resolve();
+      img.onerror = () => reject();
+    });
+  });
+
+  return Promise.all(promises);
+};

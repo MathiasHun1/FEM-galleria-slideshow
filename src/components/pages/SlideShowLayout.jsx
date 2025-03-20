@@ -1,9 +1,10 @@
-import { Outlet, Link, useNavigate } from 'react-router';
+import { Outlet, Link, useNavigate, useParams, Navigate } from 'react-router';
 import leftIcon from '/assets/shared/icon-back-button.svg';
 import rightIcon from '/assets/shared/icon-next-button.svg';
 import { useEffect } from 'react';
 
-const SlideShowLayout = ({ data, setCardId, cardData, setImageLoaded }) => {
+const SlideShowLayout = ({ data, setImageLoaded, slideshowActive }) => {
+  const params = useParams();
   /*--- temporary solution for page refresh on a CDN deployment ---*/
   const navigate = useNavigate();
 
@@ -14,32 +15,34 @@ const SlideShowLayout = ({ data, setCardId, cardData, setImageLoaded }) => {
   }, []);
 
   if (!data) {
+    navigate('/home');
     return null;
   }
   /*--------------------------------------------------------------*/
+  const currentCard = data.find((card) => card.id === params.cardId);
 
-  const currentIndex = data.indexOf(cardData);
+  const currentIndex = data.indexOf(currentCard);
+
   const prevId =
     currentIndex === 0 ? data[data.length - 1].id : data[currentIndex - 1].id;
+
   const nextId =
     currentIndex === data.length - 1 ? data[0].id : data[currentIndex + 1].id;
 
-  const stepLeft = () => {
-    if (currentIndex === 0) {
-      return;
-    } else {
-      setImageLoaded(false);
-      setCardId(prevId);
-    }
+  const handleStepRight = () => {
+    setImageLoaded(false);
+
+    setTimeout(() => {
+      navigate(`/slideshow/${nextId}`);
+    }, 300);
   };
 
-  const stepRight = () => {
-    if (currentIndex === data.length - 1) {
-      return;
-    } else {
-      setImageLoaded(false);
-      setCardId(nextId);
-    }
+  const handleStepLeft = () => {
+    setImageLoaded(false);
+
+    setTimeout(() => {
+      navigate(`/slideshow/${prevId}`);
+    }, 300);
   };
 
   const calculateIndicatorValue = () => {
@@ -64,26 +67,28 @@ const SlideShowLayout = ({ data, setCardId, cardData, setImageLoaded }) => {
         </div>
         <div className="footer__content wrapper">
           <div className="footer-meta">
-            <p className="text-heading-3">{cardData.name}</p>
+            <p className="text-heading-3">{currentCard.name}</p>
             <p className="text-subhead-2 text-black-opq">
-              {cardData.artist.name}
+              {currentCard.artist.name}
             </p>
           </div>
 
           <nav className="footer__slider-nav">
             <Link
-              to={`/slideshow/${nextId}`}
-              className={`${currentIndex === 0 ? 'inactive' : ''}`}
-              onClick={stepLeft}
+              className={`${
+                currentIndex === 0 || slideshowActive ? 'inactive' : ''
+              }`}
+              onClick={handleStepLeft}
             >
               <img src={leftIcon} alt="" />
             </Link>
             <Link
-              to={`/slideshow/${nextId}`}
               className={`${
-                currentIndex === data.length - 1 ? 'inactive' : ''
+                currentIndex === data.length - 1 || slideshowActive
+                  ? 'inactive'
+                  : ''
               }`}
-              onClick={stepRight}
+              onClick={handleStepRight}
             >
               <img src={rightIcon} alt="" />
             </Link>

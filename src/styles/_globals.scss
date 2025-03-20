@@ -25,6 +25,7 @@ body,
 .inactive {
   opacity: 0.4;
   cursor: default;
+  pointer-events: none;
 }
 
 .visible {
