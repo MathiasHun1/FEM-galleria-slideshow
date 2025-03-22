@@ -4,7 +4,6 @@ import rightIcon from '/assets/shared/icon-next-button.svg';
 import { useEffect } from 'react';
 
 const SlideShowLayout = ({ data, setImageLoaded, slideshowActive }) => {
-  const params = useParams();
   /*--- temporary solution for page refresh on a CDN deployment ---*/
   const navigate = useNavigate();
 
@@ -19,18 +18,18 @@ const SlideShowLayout = ({ data, setImageLoaded, slideshowActive }) => {
     return null;
   }
   /*--------------------------------------------------------------*/
+  const params = useParams();
+
   const currentCard = data.find((card) => card.id === params.cardId);
-
   const currentIndex = data.indexOf(currentCard);
-
+  const nextId =
+    currentIndex === data.length - 1 ? data[0].id : data[currentIndex + 1].id;
   const prevId =
     currentIndex === 0 ? data[data.length - 1].id : data[currentIndex - 1].id;
 
-  const nextId =
-    currentIndex === data.length - 1 ? data[0].id : data[currentIndex + 1].id;
-
   const handleStepRight = () => {
     setImageLoaded(false);
+    console.log(nextId);
 
     setTimeout(() => {
       navigate(`/slideshow/${nextId}`);
@@ -55,6 +54,7 @@ const SlideShowLayout = ({ data, setImageLoaded, slideshowActive }) => {
 
   const indicatorStyle = {
     width: `${calculateIndicatorValue()}%`,
+    transition: 'width 300ms ease',
   };
 
   return (

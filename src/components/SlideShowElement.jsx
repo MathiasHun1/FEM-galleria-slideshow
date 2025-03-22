@@ -5,16 +5,16 @@ import { cacheImages } from '../utils.js';
 import viewSVG from '/assets/shared/icon-view-image.svg';
 
 const SlideShowElement = ({ data, imageLoaded, setImageLoaded }) => {
-  const params = useParams();
   console.log(imageLoaded);
-
-  const currentCard = data.find((card) => card.id === params.cardId);
-
-  const { name, year, description, source, artist, images } = currentCard;
+  const params = useParams();
   const dialogRef = useRef(null);
+  const currentCard = data.find((card) => card.id === params.cardId);
+  const { name, year, description, source, artist, images } = currentCard;
 
   // preaload images for nice page render
   useEffect(() => {
+    console.log('EFFECT RUNS');
+
     const imagesArr = [
       images.hero.small.slice(1),
       images.hero.large.slice(1),
@@ -40,7 +40,7 @@ const SlideShowElement = ({ data, imageLoaded, setImageLoaded }) => {
 
   return (
     <div className="slideshow-content-wrapper wrapper">
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {imageLoaded && (
           <motion.section
             className="slideshow-content__image-section"
@@ -80,7 +80,7 @@ const SlideShowElement = ({ data, imageLoaded, setImageLoaded }) => {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {imageLoaded && (
           <motion.section
             className="content__text-section"

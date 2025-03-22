@@ -7,7 +7,6 @@ import Header from './components/Header';
 import Main from './components/Main';
 
 function App() {
-  console.log('APP RENDERS');
   const [data, setData] = useState(null);
   const [slideshowActive, setSlideshowActive] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);

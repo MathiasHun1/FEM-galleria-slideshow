@@ -1,13 +1,34 @@
 import { Link } from 'react-router';
+import { motion, AnimatePresence } from 'motion/react';
 
 const Home = ({ data }) => {
-  return (
-    <div className="masonry-cont wrapper">
-      {!data && <div>Loading ...</div>}
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+      },
+    },
+  };
 
+  const item = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  };
+
+  return (
+    <motion.div
+      key={data}
+      className="masonry-cont wrapper"
+      variants={container}
+      initial="hidden"
+      animate="show"
+    >
+      {!data && <div>Loading ...</div>}
       {data &&
         data.map((elem) => (
-          <div key={elem.name} className="card">
+          <motion.div key={elem.name} className="card" variants={item}>
             <img src={elem.images.gallery} alt="" />
             <div className="card__text">
               <div className="card__inner-wrapper">
@@ -23,9 +44,9 @@ const Home = ({ data }) => {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-    </div>
+    </motion.div>
   );
 };
 

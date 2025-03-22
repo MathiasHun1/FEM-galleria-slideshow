@@ -41,6 +41,10 @@
 .main {
   flex-grow: 1;
   display: grid;
+
+  @include media.large-above {
+    min-height: 55rem;
+  }
 }
 
 // card

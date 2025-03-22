@@ -2,8 +2,6 @@ import { Link } from 'react-router';
 import { motion } from 'motion/react';
 
 const Header = ({ slideshowActive, setSlideshowActive }) => {
-  console.log('HEADER RENDERS');
-
   return (
     <header className="primary-header wrapper">
       <Link
