@@ -120,6 +120,7 @@
 
   @include media.small-above {
     grid-template-rows: unset;
+    padding-top: 3rem;
   }
 
   @include media.large-above {
